@@ -335,14 +335,30 @@ export default function Home() {
 function ContactForm() {
   const [email, setEmail] = useState('')
   const [msg, setMsg] = useState('')
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('idle')
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
-    if (email && msg) setSent(true)
+    setStatus('sending')
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: 'e88ebf7d-f2fc-4fb0-8f57-a6ecef2c157f',
+          from_name: email,
+          subject: `New message from ${email}`,
+          message: msg,
+        }),
+      })
+      const data = await res.json()
+      setStatus(data.success ? 'sent' : 'error')
+    } catch {
+      setStatus('error')
+    }
   }
 
-  if (sent) return (
+  if (status === 'sent') return (
     <motion.div
       initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
       style={{
@@ -370,17 +386,22 @@ function ContactForm() {
         onFocus={e => e.target.style.borderColor = 'rgba(124,107,255,0.45)'}
         onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
       />
+      {status === 'error' && (
+        <p style={{ color: '#ff6b9d', fontSize: 13, margin: 0 }}>Something went wrong — please try again.</p>
+      )}
       <motion.button
         type="submit"
+        disabled={status === 'sending'}
         whileHover={{ scale: 1.03, boxShadow: '0 0 24px rgba(124,107,255,0.4)' }}
         whileTap={{ scale: 0.97 }}
         style={{
-          padding: '14px', borderRadius: 10, cursor: 'pointer',
+          padding: '14px', borderRadius: 10, cursor: status === 'sending' ? 'not-allowed' : 'pointer',
           background: 'linear-gradient(135deg, #7c6bff, #ff6b9d)',
           border: 'none', color: '#fff', fontSize: 15, fontWeight: 700,
+          opacity: status === 'sending' ? 0.7 : 1,
         }}
       >
-        Send Message
+        {status === 'sending' ? 'Sending...' : 'Send Message'}
       </motion.button>
     </form>
   )
