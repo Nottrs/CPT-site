@@ -29,9 +29,10 @@ function MagButton({ href, children }) {
       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
       style={{
         display: 'inline-block', padding: '10px 24px', borderRadius: 8,
-        background: 'linear-gradient(135deg, #7c6bff 0%, #ff6b9d 100%)',
-        fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer',
-        boxShadow: '0 0 20px rgba(124,107,255,0.35)',
+        background: 'linear-gradient(135deg, #7a5230 0%, #b07850 100%)',
+        fontSize: 14, fontWeight: 700, color: '#f7f2ea', cursor: 'pointer',
+        fontFamily: "'Inter', sans-serif",
+        boxShadow: '0 2px 12px rgba(122, 82, 48, 0.22)',
       }}
     >
       {children}
@@ -49,8 +50,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-
   return (
     <motion.header
       initial={{ y: -80, opacity: 0 }}
@@ -58,10 +57,10 @@ export default function Navbar() {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
-        background: scrolled ? 'rgba(5,5,8,0.80)' : 'transparent',
+        background: scrolled ? 'rgba(247, 242, 234, 0.92)' : 'transparent',
         backdropFilter: scrolled ? 'blur(24px)' : 'none',
         WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(110, 78, 42, 0.12)' : 'none',
         transition: 'background 0.4s, backdrop-filter 0.4s, border 0.4s',
       }}
     >
@@ -70,10 +69,10 @@ export default function Navbar() {
         height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <Link to="/" style={{
-          fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: 22,
-          letterSpacing: '-0.03em', color: '#fff',
+          fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 22,
+          letterSpacing: '0.01em', color: '#2a1a0a',
         }}>
-          CPT<span style={{ color: '#7c6bff' }}>.</span>
+          CPT<span style={{ color: '#7a5230' }}>.</span>
         </Link>
 
         <nav style={{ display: 'flex', gap: 38, alignItems: 'center' }}
@@ -87,7 +86,7 @@ export default function Navbar() {
         <button
           onClick={() => setOpen(p => !p)}
           className="mobile-menu-btn"
-          style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: 4 }}
+          style={{ background: 'none', border: 'none', color: '#2a1a0a', cursor: 'pointer', padding: 4 }}
           aria-label="Toggle menu"
         >
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -103,24 +102,24 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             style={{
               overflow: 'hidden',
-              background: 'rgba(5,5,8,0.97)',
+              background: 'rgba(247, 242, 234, 0.98)',
               backdropFilter: 'blur(24px)',
-              borderTop: '1px solid rgba(255,255,255,0.06)',
+              borderTop: '1px solid rgba(110, 78, 42, 0.1)',
             }}
           >
             <div style={{ padding: '12px 28px 24px', display: 'flex', flexDirection: 'column', gap: 4 }}>
               {links.map((l, i) => (
                 <motion.div key={l.label} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }}>
                   {l.anchor
-                    ? <a href={l.href} onClick={() => setOpen(false)} style={{ display: 'block', padding: '14px 0', fontSize: 18, fontWeight: 700, borderBottom: '1px solid rgba(255,255,255,0.05)', fontFamily: 'Syne, sans-serif', color: '#e8e8f0' }}>{l.label}</a>
-                    : <Link to={l.href} onClick={() => setOpen(false)} style={{ display: 'block', padding: '14px 0', fontSize: 18, fontWeight: 700, borderBottom: '1px solid rgba(255,255,255,0.05)', fontFamily: 'Syne, sans-serif', color: '#e8e8f0' }}>{l.label}</Link>
+                    ? <a href={l.href} onClick={() => setOpen(false)} style={{ display: 'block', padding: '14px 0', fontSize: 18, fontFamily: "'Playfair Display', Georgia, serif", borderBottom: '1px solid rgba(110, 78, 42, 0.08)', color: '#2a1a0a' }}>{l.label}</a>
+                    : <Link to={l.href} onClick={() => setOpen(false)} style={{ display: 'block', padding: '14px 0', fontSize: 18, fontFamily: "'Playfair Display', Georgia, serif", borderBottom: '1px solid rgba(110, 78, 42, 0.08)', color: '#2a1a0a' }}>{l.label}</Link>
                   }
                 </motion.div>
               ))}
               <Link to="/#contact" onClick={() => setOpen(false)} style={{
                 marginTop: 16, display: 'block', padding: '14px 0', textAlign: 'center',
-                borderRadius: 8, background: 'linear-gradient(135deg, #7c6bff, #ff6b9d)',
-                fontSize: 16, fontWeight: 700, color: '#fff',
+                borderRadius: 8, background: 'linear-gradient(135deg, #7a5230, #b07850)',
+                fontSize: 16, fontWeight: 700, color: '#f7f2ea',
               }}>
                 Get Started
               </Link>
@@ -143,8 +142,9 @@ function NavLink({ href, anchor, children }) {
   const isActive = !anchor && location.pathname === href
 
   const style = {
-    fontSize: 14, fontWeight: 500,
-    color: isActive ? '#fff' : hov ? '#fff' : '#8888a0',
+    fontSize: 14, fontWeight: 400,
+    fontFamily: "'Inter', sans-serif",
+    color: isActive ? '#2a1a0a' : hov ? '#2a1a0a' : '#9b7c5a',
     transition: 'color 0.2s',
     position: 'relative',
   }
@@ -153,7 +153,7 @@ function NavLink({ href, anchor, children }) {
       animate={{ scaleX: hov || isActive ? 1 : 0 }}
       style={{
         position: 'absolute', bottom: -2, left: 0, right: 0, height: 1,
-        background: 'linear-gradient(90deg, #7c6bff, #ff6b9d)',
+        background: 'linear-gradient(90deg, #7a5230, #b07850)',
         transformOrigin: 'left',
       }}
     />

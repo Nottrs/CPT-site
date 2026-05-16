@@ -33,7 +33,8 @@ function FooterLink({ children }) {
       onMouseLeave={() => setHov(false)}
       style={{
         fontSize: 14,
-        color: hov ? '#d0d0e8' : '#55557a',
+        fontFamily: "'Inter', sans-serif",
+        color: hov ? '#2a1a0a' : '#9b7c5a',
         transition: 'color 0.2s',
         display: 'inline-flex', alignItems: 'center', gap: 4,
       }}
@@ -46,8 +47,8 @@ function FooterLink({ children }) {
 export default function Footer() {
   return (
     <footer style={{
-      borderTop: '1px solid rgba(255,255,255,0.06)',
-      background: '#050508',
+      borderTop: '1px solid rgba(110, 78, 42, 0.12)',
+      background: '#efe8da',
       padding: '72px 0 36px',
     }}>
       <div className="container">
@@ -56,49 +57,44 @@ export default function Footer() {
           gridTemplateColumns: '1.6fr 1fr 1fr 1fr',
           gap: 48, marginBottom: 64,
         }}>
-          {/* Brand col */}
           <div>
             <Link to="/" style={{
               display: 'inline-block',
-              fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: 24,
-              color: '#fff', letterSpacing: '-0.03em', marginBottom: 16,
+              fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 400, fontSize: 24,
+              color: '#2a1a0a', letterSpacing: '0.01em', marginBottom: 16,
             }}>
-              CPT<span style={{ color: '#7c6bff' }}>.</span>
+              CPT<span style={{ color: '#7a5230' }}>.</span>
             </Link>
-            <p style={{ fontSize: 14, color: '#55557a', lineHeight: 1.7, maxWidth: 260, marginBottom: 24 }}>
+            <p style={{ fontSize: 14, fontFamily: "'Inter', sans-serif", color: '#9b7c5a', lineHeight: 1.7, maxWidth: 260, marginBottom: 24 }}>
               Custom software, automation tools, and data platforms
               for companies that refuse to settle for off-the-shelf.
             </p>
             <div style={{ display: 'flex', gap: 10 }}>
-              {[
-                [LinkedinIcon, '#0077b5'],
-                [TwitterIcon, '#1DA1F2'],
-                [InstagramIcon, '#E1306C'],
-              ].map(([Icon, color], i) => (
+              {[LinkedinIcon, TwitterIcon, InstagramIcon].map((Icon, i) => (
                 <motion.a
                   key={i}
                   href="#"
                   whileHover={{ scale: 1.1 }}
                   style={{
                     width: 36, height: 36, borderRadius: 10,
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    background: 'rgba(110, 78, 42, 0.06)',
+                    border: '1px solid rgba(110, 78, 42, 0.14)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: '#7777a0',
+                    color: '#9b7c5a',
                   }}
                 >
-                  <Icon size={15} />
+                  <Icon />
                 </motion.a>
               ))}
             </div>
           </div>
 
-          {/* Link cols */}
           {Object.entries(LINKS).map(([heading, items]) => (
             <div key={heading}>
               <div style={{
                 fontSize: 11, fontWeight: 700, letterSpacing: 2,
-                textTransform: 'uppercase', color: '#44445a', marginBottom: 20,
+                fontFamily: "'Inter', sans-serif",
+                textTransform: 'uppercase', color: '#b09870', marginBottom: 20,
               }}>
                 {heading}
               </div>
@@ -113,19 +109,18 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Bottom bar */}
         <div style={{
-          borderTop: '1px solid rgba(255,255,255,0.05)',
+          borderTop: '1px solid rgba(110, 78, 42, 0.08)',
           paddingTop: 28, display: 'flex',
           justifyContent: 'space-between', alignItems: 'center',
           flexWrap: 'wrap', gap: 12,
         }}>
-          <div style={{ fontSize: 13, color: '#33334a' }}>
+          <div style={{ fontSize: 13, fontFamily: "'Inter', sans-serif", color: '#c0a880' }}>
             © 2025 CPT Studio. All rights reserved.
           </div>
           <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e' }} />
-            <span style={{ fontSize: 12, color: '#44445a' }}>All systems operational</span>
+            <span style={{ fontSize: 12, fontFamily: "'Inter', sans-serif", color: '#b09870' }}>All systems operational</span>
           </div>
         </div>
       </div>
