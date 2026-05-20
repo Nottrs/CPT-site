@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -11,6 +10,48 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         rewrite: path => path.replace(/^\/quote-api/, ''),
+      },
+      '/news/n1': {
+        target: 'https://n1info.rs',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/news\/n1/, ''),
+      },
+      '/news/blic': {
+        target: 'https://www.blic.rs',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/news\/blic/, ''),
+      },
+      '/news/telegraf': {
+        target: 'https://www.telegraf.rs',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/news\/telegraf/, ''),
+      },
+      '/news/novosti': {
+        target: 'https://www.novosti.rs',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/news\/novosti/, ''),
+      },
+      '/news/kurir': {
+        target: 'https://www.kurir.rs',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/news\/kurir/, ''),
+      },
+      '/api/anthropic': {
+        target: 'https://api.anthropic.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: path => path.replace(/^\/api\/anthropic/, ''),
+      },
+      '/api/gemini': {
+        target: 'https://gemini.googleapis.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: path => path.replace(/^\/api\/gemini/, ''),
       },
     },
   },

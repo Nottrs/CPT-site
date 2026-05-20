@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ExternalLink, GitBranch, Layers } from 'lucide-react'
+import NewsFilterPage from './NewsFilterPage'
+import FridgePage from './FridgePage'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PROJECT DETAIL PAGES
@@ -38,6 +40,8 @@ const STATUS_STYLE = {
 
 export default function ProjectDetail() {
   const { slug } = useParams()
+  if (slug === 'alpha') return <NewsFilterPage />
+  if (slug === 'beta') return <FridgePage />
   const project = DETAIL_PAGES[slug]
 
   if (!project) {
