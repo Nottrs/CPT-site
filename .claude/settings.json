@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.blic.rs)",
+      "WebFetch(domain:www.novosti.rs)",
+      "WebSearch",
+      "WebFetch(domain:www.rts.rs)",
+      "WebFetch(domain:www.b92.net)",
+      "WebFetch(domain:forum.b92.net)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:pregled-vesti.com)",
+      "WebFetch(domain:www.naslovi.net)",
+      "WebFetch(domain:naslovi.net)"
+    ]
+  }
+}

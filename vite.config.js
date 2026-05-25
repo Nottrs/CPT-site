@@ -41,6 +41,24 @@ export default defineConfig({
         secure: false,
         rewrite: path => path.replace(/^\/news\/kurir/, ''),
       },
+      '/news/rts': {
+        target: 'https://www.rts.rs',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/news\/rts/, ''),
+      },
+      '/news/b92': {
+        target: 'https://www.b92.net',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/news\/b92/, ''),
+      },
+      '/news/naslovi': {
+        target: 'https://naslovi.net',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/news\/naslovi/, ''),
+      },
       '/api/anthropic': {
         target: 'https://api.anthropic.com',
         changeOrigin: true,

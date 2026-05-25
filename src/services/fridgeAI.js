@@ -30,7 +30,7 @@ Return ONLY valid JSON with no markdown fences or extra text:
       "category": "sweet",
       "description": "Warm baked apple dessert with a crispy oat topping",
       "usesItems": ["apple"]
-    },
+    },  
     {
       "name": "Grilled Chicken",
       "category": "savory",

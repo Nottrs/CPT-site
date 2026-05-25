@@ -7,10 +7,13 @@ import { Link } from 'react-router-dom'
 // To add/change a source: update this array and add its proxy in vite.config.js
 const SOURCES = [
   { id: 'n1',       name: 'N1 Info',  path: '/news/n1/feed/',      color: '#7a5230' },
-  { id: 'blic',     name: 'Blic',     path: '/news/blic/rss',      color: '#9b5030' },
+  { id: 'blic',     name: 'Blic',     path: '/news/blic/rss/IT',   color: '#9b5030' },
   { id: 'telegraf', name: 'Telegraf', path: '/news/telegraf/rss',  color: '#5a7a5a' },
-  { id: 'novosti',  name: 'Novosti',  path: '/news/novosti/rss',   color: '#4a6a8a' },
+  { id: 'novosti',  name: 'Novosti',  path: '/news/novosti/rss/vesti', color: '#4a6a8a' },
   { id: 'kurir',    name: 'Kurir',    path: '/news/kurir/rss',     color: '#8a5a30' },
+  { id: 'rts',     name: 'RTS',     path: '/news/rts/page/stories/sr/story/11/Srbija-danas/rss.html', color: '#306a4a' },
+  { id: 'b92',     name: 'B92',     path: '/news/b92/rss/b92/info',     color: '#6a3a7a' },
+  { id: 'naslovi', name: 'Naslovi', path: '/news/naslovi/rss/',          color: '#7a4a6a' },
 ]
 
 // ── AI/ML keyword matching ────────────────────────────────────────────────
@@ -52,6 +55,46 @@ const AI_KEYWORDS = [
 
 // Short terms matched as whole words via regex
 const AI_WORD_PATTERNS = [/\bai\b/i, /\bgpt[\s-]?\d/i, /\bllm\b/i, /\bgemini\b/i, /\bgrok\b/i]
+
+// ── IT keyword matching ───────────────────────────────────────────────────
+const IT_KEYWORDS = [
+  // Serbian terms
+  'tehnologija', 'tehnologij', 'informatika', 'informacione tehnologije',
+  'sajber', 'cyber', 'digitalizacija', 'digitalna transformacija',
+  'softver', 'hardver', 'programiranje', 'programer', 'developer',
+  'aplikacija', 'mobilna aplikacija', 'pametni telefon',
+  'kriptovaluta', 'blockchain', 'bitcoin', 'ethereum',
+  'hakerski', 'hakovani', 'hakovan', 'ransomware', 'malware', 'phishing',
+  'start-up', 'startup', 'tech kompanija',
+  'virtuelna realnost', 'proširena realnost', 'metaverse',
+  'oblak', 'cloud computing', 'server', 'datacenter',
+  'e-commerce', 'onlajn kupovina', 'online kupovina',
+  'društvene mreže', 'drustvene mreze',
+  // Tech brands prominent in Serbian press
+  'apple', 'google', 'microsoft', 'meta', 'amazon', 'samsung',
+  'huawei', 'nvidia', 'intel', 'qualcomm', 'spacex',
+  'facebook', 'instagram', 'tiktok', 'youtube', 'whatsapp',
+  // General English IT terms used in Serbian journalism
+  'software', 'hardware', 'smartphone', 'laptop', 'tablet',
+  'cybersecurity', 'hacker', 'data breach', 'privacy',
+  'artificial intelligence', 'machine learning',
+  'cloud', 'app store', 'gaming', 'esport',
+  '5g', 'wi-fi', 'broadband', 'fiber',
+]
+
+const IT_WORD_PATTERNS = [
+  /\bit\b/i, /\bpc\b/i, /\bvr\b/i, /\bar\b/i,
+  /\biphone\b/i, /\bandroid\b/i, /\bwindows\b/i, /\blinux\b/i, /\bmacos\b/i,
+  /\bios\s*\d/i, /\bapi\b/i, /\bsaas\b/i, /\biot\b/i,
+]
+
+function matchesIT(title, desc) {
+  const raw = `${title} ${desc}`
+  const lower = raw.toLowerCase()
+  const norm = normalize(lower)
+  if (IT_KEYWORDS.some(kw => lower.includes(kw) || norm.includes(normalize(kw)))) return true
+  return IT_WORD_PATTERNS.some(re => re.test(raw))
+}
 
 function normalize(str) {
   return str
@@ -111,6 +154,7 @@ function parseRSS(xmlString, source) {
       sourceId: source.id,
       sourceColor: source.color,
       isAI: matchesAI(title, desc),
+      isIT: matchesIT(title, desc),
     }
   }).filter(a => a.title)
 }
@@ -291,12 +335,13 @@ export default function NewsFilterPage() {
   const displayed = useMemo(() => {
     return articles
       .filter(a => enabled.has(a.sourceId))
-      .filter(a => filterMode === 'all' || a.isAI)
+      .filter(a => filterMode === 'all' || (filterMode === 'ai' ? a.isAI : a.isIT))
       .sort((a, b) => b.date - a.date)
   }, [articles, enabled, filterMode])
 
   const totalEnabled  = articles.filter(a => enabled.has(a.sourceId)).length
   const aiCount       = articles.filter(a => enabled.has(a.sourceId) && a.isAI).length
+  const itCount       = articles.filter(a => enabled.has(a.sourceId) && a.isIT).length
   const isLoading     = Object.values(sourceStates).some(s => s === 'loading')
 
   const toggleSource = (id) => {
@@ -364,7 +409,11 @@ export default function NewsFilterPage() {
           <div style={{ width: 1, height: 22, background: 'rgba(110,78,42,0.15)', margin: '0 4px' }} />
 
           {/* Filter mode */}
-          {['ai', 'all'].map(mode => (
+          {[
+            { mode: 'ai',  label: 'AI / ML only' },
+            { mode: 'it',  label: 'IT only' },
+            { mode: 'all', label: 'All articles' },
+          ].map(({ mode, label }) => (
             <motion.button key={mode} whileTap={{ scale: 0.93 }} onClick={() => setFilterMode(mode)}
               style={{
                 padding: '6px 14px', borderRadius: 20, cursor: 'pointer',
@@ -373,7 +422,7 @@ export default function NewsFilterPage() {
                 color: filterMode === mode ? '#f7f2ea' : '#9b7c5a',
                 fontSize: 13, fontWeight: 600, fontFamily: "'Inter', sans-serif",
               }}>
-              {mode === 'ai' ? 'AI / ML only' : 'All articles'}
+              {label}
             </motion.button>
           ))}
 
@@ -402,8 +451,9 @@ export default function NewsFilterPage() {
           fontSize: 13, color: '#b09870', fontFamily: "'Inter', sans-serif",
         }}>
           <span>
-            <strong style={{ color: '#7a5230' }}>{aiCount}</strong> AI/ML articles
-            {filterMode === 'all' && <> · <strong style={{ color: '#2a1a0a' }}>{totalEnabled}</strong> total</>}
+            {filterMode === 'ai'  && <><strong style={{ color: '#7a5230' }}>{aiCount}</strong> AI/ML articles</>}
+            {filterMode === 'it'  && <><strong style={{ color: '#7a5230' }}>{itCount}</strong> IT articles</>}
+            {filterMode === 'all' && <><strong style={{ color: '#2a1a0a' }}>{totalEnabled}</strong> total articles</>}
           </span>
           {isLoading && (
             <span style={{ color: '#9b7c5a', fontStyle: 'italic' }}>Fetching…</span>
