@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git rm *)",
       "Bash(git add *)",
-      "Bash(echo \".claude\")"
+      "Bash(echo \".claude\")",
+      "Bash(git pull *)"
     ]
   }
 }
