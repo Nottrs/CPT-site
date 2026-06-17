@@ -33,30 +33,31 @@ const PROJECTS = [
   },
   {
     id: 1,
-    title: 'Project Alpha',
-    desc: 'Your flagship product — replace this with a real description.',
-    longDesc: 'Add a longer description here. Explain what the project does, who it is for, and what makes it interesting.',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
+    title: 'Serbian AI News Filter',
+    desc: 'Aggregates Serbian news RSS feeds and surfaces only AI & machine learning coverage.',
+    longDesc: 'Live RSS aggregator across five Serbian news sources with real-time filtering for artificial intelligence and machine learning articles.',
+    tags: ['React', 'RSS', 'Vite'],
     category: 'Web App',
     demoUrl: null,
     repoUrl: null,
     status: 'Live',
-    accent: '#7c6bff',
-    visual: ['#12102a', '#1a1040'],
+    accent: '#8b6914',
+    visual: ['#f0e8d8', '#e8dcc8'],
     slug: 'alpha',
   },
   {
     id: 2,
-    title: 'Project Beta',
-    desc: 'A second project — swap in your real project data.',
-    longDesc: 'Add a longer description here. Explain what the project does, who it is for, and what makes it interesting.',
-    tags: ['Python', 'FastAPI', 'Redis'],
-    category: 'API',
+    title: 'Fridge',
+    desc: 'AI-powered fridge inventory that maps your ingredients as a live graph and suggests recipes.',
+    longDesc: 'Describe your fridge contents in plain language and the AI categorises everything into sweet and savory nodes, then suggests recipes — visualised as an Obsidian-style graph.',
+    tags: ['React', 'Claude AI', 'SVG'],
+    category: 'Web App',
     demoUrl: null,
     repoUrl: null,
     status: 'Beta',
-    accent: '#ff6b9d',
-    visual: ['#2a1018', '#1a0d20'],
+    accent: '#7a5230',
+    visual: ['#ece0d4', '#e4d8c8'],
+    slug: 'beta',
   },
   {
     id: 3,
@@ -68,8 +69,8 @@ const PROJECTS = [
     demoUrl: null,
     repoUrl: null,
     status: 'In Development',
-    accent: '#6bffd4',
-    visual: ['#0a2018', '#0d1a22'],
+    accent: '#5a7a5a',
+    visual: ['#dce8dc', '#d4e0d4'],
   },
   {
     id: 4,
@@ -81,8 +82,8 @@ const PROJECTS = [
     demoUrl: null,
     repoUrl: null,
     status: 'Live',
-    accent: '#ffb86b',
-    visual: ['#22180a', '#2a200d'],
+    accent: '#b07030',
+    visual: ['#f0e4cc', '#e8dcc0'],
   },
   {
     id: 5,
@@ -94,8 +95,8 @@ const PROJECTS = [
     demoUrl: null,
     repoUrl: null,
     status: 'Beta',
-    accent: '#6bc8ff',
-    visual: ['#0a1828', '#0d1530'],
+    accent: '#4a6a8a',
+    visual: ['#d8e4f0', '#d0dce8'],
   },
   {
     id: 6,
@@ -107,16 +108,16 @@ const PROJECTS = [
     demoUrl: null,
     repoUrl: null,
     status: 'Live',
-    accent: '#ff9e6b',
-    visual: ['#2a140a', '#201010'],
+    accent: '#9b5030',
+    visual: ['#ece0d8', '#e4d8d0'],
   },
 ]
 
 const STATUS_STYLE = {
-  'Live':           { bg: 'rgba(107,255,212,0.12)', border: 'rgba(107,255,212,0.3)',  text: '#6bffd4', dot: '#6bffd4' },
-  'Beta':           { bg: 'rgba(124,107,255,0.12)', border: 'rgba(124,107,255,0.3)',  text: '#a89aff', dot: '#7c6bff' },
-  'In Development': { bg: 'rgba(255,184,107,0.12)', border: 'rgba(255,184,107,0.3)',  text: '#ffca80', dot: '#ffb86b' },
-  'Archived':       { bg: 'rgba(100,100,120,0.12)', border: 'rgba(100,100,120,0.28)', text: '#778',    dot: '#556' },
+  'Live':           { bg: 'rgba(90,122,90,0.12)',  border: 'rgba(90,122,90,0.28)',   text: '#5a7a5a', dot: '#5a7a5a' },
+  'Beta':           { bg: 'rgba(122,82,48,0.12)',   border: 'rgba(122,82,48,0.28)',   text: '#9b7c5a', dot: '#7a5230' },
+  'In Development': { bg: 'rgba(176,112,48,0.12)',  border: 'rgba(176,112,48,0.28)',  text: '#c08050', dot: '#b07040' },
+  'Archived':       { bg: 'rgba(130,110,90,0.12)',  border: 'rgba(130,110,90,0.25)',  text: '#9b8060', dot: '#7a6040' },
 }
 
 const CATEGORIES = ['All', ...Array.from(new Set(PROJECTS.map(p => p.category)))]
@@ -128,92 +129,75 @@ function CardVisual({ project, hov }) {
       aspectRatio: '16/9', position: 'relative', overflow: 'hidden',
       background: `linear-gradient(135deg, ${project.visual[0]}, ${project.visual[1]})`,
     }}>
-      {/* Glow */}
       <div style={{
         position: 'absolute', inset: 0,
         background: `radial-gradient(circle at 75% 30%, ${project.accent}28, transparent 60%)`,
       }} />
 
-      {/* Abstract placeholder shapes */}
       <div style={{
         position: 'absolute', top: '15%', left: '10%',
         width: '40%', height: '35%',
-        background: `${project.accent}18`,
+        background: `${project.accent}14`,
         borderRadius: 10,
-        border: `1px solid ${project.accent}30`,
+        border: `1px solid ${project.accent}28`,
       }} />
       <div style={{
         position: 'absolute', top: '30%', left: '25%',
         width: '55%', height: '8px',
-        background: `${project.accent}25`,
+        background: `${project.accent}20`,
         borderRadius: 4,
       }} />
       <div style={{
         position: 'absolute', top: '45%', left: '25%',
         width: '38%', height: '8px',
-        background: `rgba(255,255,255,0.07)`,
+        background: `rgba(110, 78, 42, 0.1)`,
         borderRadius: 4,
       }} />
       <div style={{
         position: 'absolute', bottom: '15%', right: '10%',
         width: '28%', height: '28%',
-        border: `1px solid ${project.accent}40`,
+        border: `1px solid ${project.accent}35`,
         borderRadius: '50%',
-        background: `${project.accent}10`,
+        background: `${project.accent}0c`,
       }} />
 
-      {/* Project initial */}
       <div style={{
         position: 'absolute', top: '50%', left: '50%',
         transform: 'translate(-50%,-50%)',
-        fontFamily: 'Syne, sans-serif', fontWeight: 800,
-        fontSize: 42, color: `${project.accent}30`,
+        fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800,
+        fontSize: 42, color: `${project.accent}28`,
         userSelect: 'none', letterSpacing: -2,
       }}>
         {project.title.split(' ').map(w => w[0]).join('')}
       </div>
 
-      {/* Hover overlay */}
       <motion.div
         animate={{ opacity: hov ? 1 : 0 }}
         transition={{ duration: 0.22 }}
         style={{
           position: 'absolute', inset: 0,
-          background: 'rgba(5,5,8,0.55)', backdropFilter: 'blur(3px)',
+          background: 'rgba(247, 242, 234, 0.88)', backdropFilter: 'blur(3px)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
         }}
       >
         {project.demoUrl && (
-          project.demoUrl.startsWith('/') ? (
-            <Link to={project.demoUrl} onClick={e => e.stopPropagation()}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 6,
-                padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 700,
-                background: `linear-gradient(135deg, ${project.accent}, ${project.accent}bb)`,
-                color: '#fff', textDecoration: 'none',
-              }}
-            >
-              <ExternalLink size={13} /> Otvori
-            </Link>
-          ) : (
-            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer"
-              onClick={e => e.stopPropagation()}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 6,
-                padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 700,
-                background: `linear-gradient(135deg, ${project.accent}, ${project.accent}bb)`,
-                color: '#fff',
-              }}
-            >
-              <ExternalLink size={13} /> Live Demo
-            </a>
-          )
+          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer"
+            onClick={e => e.stopPropagation()}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 6,
+              padding: '8px 18px', borderRadius: 8, fontSize: 13, fontWeight: 700,
+              background: `linear-gradient(135deg, #7a5230, #b07850)`,
+              color: '#f7f2ea',
+            }}
+          >
+            <ExternalLink size={13} /> Live Demo
+          </a>
         )}
         {!project.demoUrl && (
           <div style={{
             padding: '8px 18px', borderRadius: 8, fontSize: 12, fontWeight: 600,
-            background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)',
-            color: '#888',
+            background: 'rgba(110, 78, 42, 0.08)', border: '1px solid rgba(110, 78, 42, 0.2)',
+            color: '#9b7c5a',
           }}>
             Demo coming soon
           </div>
@@ -224,8 +208,8 @@ function CardVisual({ project, hov }) {
             style={{
               display: 'flex', alignItems: 'center', gap: 5,
               padding: '8px 14px', borderRadius: 8, fontSize: 13, fontWeight: 600,
-              background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)',
-              color: '#ccc',
+              background: 'rgba(110, 78, 42, 0.08)', border: '1px solid rgba(110, 78, 42, 0.18)',
+              color: '#7a5230',
             }}
           >
             <GitBranch size={13} />
@@ -254,9 +238,8 @@ function ProjectCard({ project }) {
       style={{
         borderRadius: 16, overflow: 'hidden',
         cursor: hasPage ? 'pointer' : 'default',
-        background: hov ? 'rgba(17,17,28,0.95)' : 'rgba(11,11,20,0.7)',
-        border: `1px solid ${hov ? project.accent + '55' : 'rgba(255,255,255,0.07)'}`,
-        backdropFilter: 'blur(12px)',
+        background: hov ? 'rgba(224, 210, 190, 0.95)' : 'rgba(235, 226, 212, 0.8)',
+        border: `1px solid ${hov ? 'rgba(110, 78, 42, 0.3)' : 'rgba(110, 78, 42, 0.15)'}`,
         transition: 'background 0.3s, border 0.3s',
         display: 'flex', flexDirection: 'column',
         transform: hov && hasPage ? 'translateY(-4px)' : 'translateY(0)',
@@ -265,16 +248,15 @@ function ProjectCard({ project }) {
       <CardVisual project={project} hov={hov} />
 
       <div style={{ padding: '20px 20px 22px', flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {/* Title row */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
           <div>
             <div style={{
-              fontFamily: 'Syne, sans-serif', fontSize: 17, fontWeight: 800,
-              color: '#fff', lineHeight: 1.25, marginBottom: 4,
+              fontFamily: "'Playfair Display', Georgia, serif", fontSize: 17, fontWeight: 700,
+              color: '#2a1a0a', lineHeight: 1.25, marginBottom: 4,
             }}>
               {project.title}
             </div>
-            <div style={{ fontSize: 13, color: '#6b6b88', lineHeight: 1.55 }}>
+            <div style={{ fontSize: 13, color: '#9b7c5a', lineHeight: 1.55 }}>
               {project.desc}
             </div>
           </div>
@@ -284,9 +266,9 @@ function ProjectCard({ project }) {
                 animate={{ opacity: hov ? 1 : 0.4 }}
                 style={{
                   width: 28, height: 28, borderRadius: 8,
-                  background: project.accent + '20', border: `1px solid ${project.accent}35`,
+                  background: 'rgba(122, 82, 48, 0.1)', border: '1px solid rgba(122, 82, 48, 0.25)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: project.accent,
+                  color: '#7a5230',
                 }}
               >
                 <ArrowUpRight size={14} />
@@ -295,7 +277,6 @@ function ProjectCard({ project }) {
           )}
         </div>
 
-        {/* Status + category */}
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 5,
@@ -311,21 +292,20 @@ function ProjectCard({ project }) {
           </span>
           <span style={{
             fontSize: 11, fontWeight: 600, padding: '3px 9px', borderRadius: 20,
-            background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
-            color: '#666680',
+            background: 'rgba(110, 78, 42, 0.06)', border: '1px solid rgba(110, 78, 42, 0.14)',
+            color: '#9b7c5a',
           }}>
             {project.category}
           </span>
         </div>
 
-        {/* Tags */}
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 'auto', paddingTop: 6 }}>
           {project.tags.map(t => (
             <span key={t} style={{
               fontSize: 11, padding: '2px 8px', borderRadius: 5,
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.07)',
-              color: '#55558a', fontFamily: 'monospace',
+              background: 'rgba(110, 78, 42, 0.06)',
+              border: '1px solid rgba(110, 78, 42, 0.14)',
+              color: '#7a5230', fontFamily: "'Inter', sans-serif",
             }}>
               {t}
             </span>
@@ -357,7 +337,6 @@ export default function ProjectsPage() {
     <section style={{ padding: '100px 0 120px' }}>
       <div className="container">
 
-        {/* Page header */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
@@ -366,49 +345,44 @@ export default function ProjectsPage() {
         >
           <div style={{
             display: 'inline-block', fontSize: 11, fontWeight: 700, letterSpacing: 3,
-            textTransform: 'uppercase', color: '#7c6bff',
-            background: 'rgba(124,107,255,0.1)', border: '1px solid rgba(124,107,255,0.2)',
+            textTransform: 'uppercase', color: '#7a5230',
+            background: 'rgba(122, 82, 48, 0.08)', border: '1px solid rgba(122, 82, 48, 0.2)',
             borderRadius: 100, padding: '5px 14px', marginBottom: 20,
           }}>
             Our Work
           </div>
-          <h1 style={{
-            fontSize: 'clamp(34px, 5vw, 64px)', fontWeight: 800, color: '#fff', marginBottom: 16,
-          }}>
+          <h1 style={{ fontSize: 'clamp(34px, 5vw, 64px)', color: '#2a1a0a', marginBottom: 16 }}>
             Project Demos
           </h1>
-          <p style={{ fontSize: 17, color: '#7878a0', maxWidth: 520, lineHeight: 1.7, marginBottom: 36 }}>
+          <p style={{ fontSize: 17, color: '#9b7c5a', maxWidth: 520, lineHeight: 1.7, marginBottom: 36 }}>
             Live previews and demos of software we've built.
             Click a card to launch the demo, or explore the source.
           </p>
 
-          {/* How to add a project hint */}
           <div style={{
             display: 'inline-flex', alignItems: 'flex-start', gap: 10,
-            background: 'rgba(124,107,255,0.07)', border: '1px solid rgba(124,107,255,0.18)',
+            background: 'rgba(122, 82, 48, 0.06)', border: '1px solid rgba(122, 82, 48, 0.16)',
             borderRadius: 12, padding: '12px 18px', maxWidth: 540,
           }}>
-            <Layers size={15} color="#7c6bff" style={{ marginTop: 1, flexShrink: 0 }} />
-            <div style={{ fontSize: 12, color: '#7777aa', lineHeight: 1.6 }}>
-              <strong style={{ color: '#a89aff' }}>To add a project:</strong>{' '}
-              open <code style={{ background: 'rgba(255,255,255,0.07)', padding: '1px 6px', borderRadius: 4, fontSize: 11 }}>
+            <Layers size={15} color="#7a5230" style={{ marginTop: 1, flexShrink: 0 }} />
+            <div style={{ fontSize: 12, color: '#9b7c5a', lineHeight: 1.6 }}>
+              <strong style={{ color: '#7a5230' }}>To add a project:</strong>{' '}
+              open <code style={{ background: 'rgba(110, 78, 42, 0.08)', padding: '1px 6px', borderRadius: 4, fontSize: 11 }}>
                 src/pages/ProjectsPage.jsx
               </code>{' '}
-              and edit the <code style={{ background: 'rgba(255,255,255,0.07)', padding: '1px 6px', borderRadius: 4, fontSize: 11 }}>
+              and edit the <code style={{ background: 'rgba(110, 78, 42, 0.08)', padding: '1px 6px', borderRadius: 4, fontSize: 11 }}>
                 PROJECTS
               </code> array at the top of the file.
             </div>
           </div>
         </motion.div>
 
-        {/* Filters */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           style={{ display: 'flex', gap: 16, marginBottom: 40, flexWrap: 'wrap', alignItems: 'center' }}
         >
-          {/* Category filter */}
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {CATEGORIES.map(c => (
               <FilterBtn key={c} active={activeCategory === c} onClick={() => setActiveCategory(c)}>
@@ -417,9 +391,8 @@ export default function ProjectsPage() {
             ))}
           </div>
 
-          <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.08)' }} />
+          <div style={{ width: 1, height: 24, background: 'rgba(110, 78, 42, 0.15)' }} />
 
-          {/* Status filter */}
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {statusOptions.map(s => (
               <FilterBtn key={s} active={activeStatus === s} onClick={() => setActiveStatus(s)} small>
@@ -428,12 +401,11 @@ export default function ProjectsPage() {
             ))}
           </div>
 
-          <div style={{ marginLeft: 'auto', fontSize: 13, color: '#44445a' }}>
+          <div style={{ marginLeft: 'auto', fontSize: 13, color: '#b09870' }}>
             {filtered.length} project{filtered.length !== 1 ? 's' : ''}
           </div>
         </motion.div>
 
-        {/* Grid */}
         <motion.div layout style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
@@ -449,7 +421,7 @@ export default function ProjectsPage() {
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             style={{ textAlign: 'center', padding: '80px 20px' }}
           >
-            <div style={{ fontSize: 15, color: '#44445a' }}>No projects match the selected filters.</div>
+            <div style={{ fontSize: 15, color: '#b09870' }}>No projects match the selected filters.</div>
           </motion.div>
         )}
       </div>
@@ -465,10 +437,11 @@ function FilterBtn({ active, onClick, children, small }) {
       style={{
         padding: small ? '6px 12px' : '8px 16px',
         borderRadius: 20, cursor: 'pointer',
-        background: active ? 'linear-gradient(135deg, #7c6bff, #ff6b9d)' : 'rgba(255,255,255,0.04)',
-        border: active ? 'none' : '1px solid rgba(255,255,255,0.08)',
-        color: active ? '#fff' : '#7777a0',
+        background: active ? 'linear-gradient(135deg, #7a5230, #b07850)' : 'rgba(110, 78, 42, 0.06)',
+        border: active ? 'none' : '1px solid rgba(110, 78, 42, 0.16)',
+        color: active ? '#f7f2ea' : '#9b7c5a',
         fontSize: small ? 12 : 13, fontWeight: 600,
+        fontFamily: "'Inter', sans-serif",
         transition: 'background 0.2s, color 0.2s',
       }}
     >
