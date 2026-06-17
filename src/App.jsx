@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './index.css'
 import Navbar from './components/Navbar'
@@ -10,7 +11,7 @@ import FridgePage from './pages/FridgePage'
 export default function App() {
   return (
     <>
-<Navbar />
+      <Navbar />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

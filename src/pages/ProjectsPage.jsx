@@ -19,6 +19,19 @@ import { ExternalLink, GitBranch, Tag, ArrowUpRight, Layers } from 'lucide-react
 // ─────────────────────────────────────────────────────────────────────────────
 const PROJECTS = [
   {
+    id: 0,
+    title: 'CPT Tajmer',
+    desc: 'Pomodoro tajmer — 25 min fokus, 5 min pauza, duga pauza na svakih 4 runde.',
+    longDesc: 'Pomodoro tehnika za produktivnost: fokusiraj se 25 minuta, odmori 5 minuta. Vizuelni krug napretka, zvučni signal, automatsko smenjivanje modova.',
+    tags: ['React', 'Vite', 'Web Audio API'],
+    category: 'Web App',
+    demoUrl: '/apps/cpt-tajmer',
+    repoUrl: null,
+    status: 'Live',
+    accent: '#a89aff',
+    visual: ['#0e0c22', '#14103a'],
+  },
+  {
     id: 1,
     title: 'Serbian AI News Filter',
     desc: 'Aggregates Serbian news RSS feeds and surfaces only AI & machine learning coverage.',
